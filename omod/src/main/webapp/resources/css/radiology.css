@@ -1,0 +1,77 @@
+/*radiologyOrderList.jsp*/
+div[name="loading"]{
+margin-right:2%;
+float:right;
+}
+.left{
+float:left;
+width:25%;
+}
+.center{
+position:absolute;
+text-align:center;
+left:25%;
+width:50%;
+}
+.right{
+float:right;
+}
+.right div{
+float:right;
+}
+.tableHeader{
+height:2em;
+}
+.verticalCentered > *{
+vertical-align:middle;
+}
+div#matchedOrders_paginate > span  > span{
+vertical-align:top;
+}
+div.colVisDiv,div.colVisDiv *{
+height:100%;
+}
+div.dataTables_paginate.fg-buttonset.ui-buttonset.fg-buttonset-multi.ui-buttonset-multi.paging_full_numbers span{
+width:auto;
+height:auto;
+margin:0 1px 0 0;
+}
+
+#radiologyTabs {
+	font-size: 0.8em;
+	margin: 10px auto 7px auto;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 2px;
+	border-bottom: 1px solid navy;
+	width: 99%;
+}
+
+#radiologyTabs ul, #radiologyTabs li {
+	display: inline;
+	list-style-type: none;
+	padding: 0 0 0 0;
+}
+
+#radiologyTabs a:link, #radiologyTabs a:visited {
+	border: 1px solid navy;
+	font-size: small;
+	font-weight: bold;
+	margin-right: 8px;
+	padding: 2px 10px 2px 10px;
+	text-decoration: none;
+	color: navy;
+	background: #E0E0F0;
+}
+#radiologyTabs a:link.active, #radiologyTabs a:visited.active {
+	border-bottom: 1px solid #FFFFFF;
+}
+#radiologyTabs a.current, #radiologyTabs a:link.current, #radiologyTabs a:visited.current, #radiologyTabs a.current:hover {
+	background: #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+	color: navy;
+	text-decoration: none;
+}
+#radiologyTabs a:hover {
+	text-decoration: underline;
+}
