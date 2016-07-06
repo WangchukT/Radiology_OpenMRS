@@ -33,8 +33,9 @@ public class AdminList extends AdministrationSectionExt {
         final Map<String, String> map = new HashMap<String, String>();
         
         map.put("module/radiology/radiologyOrder.list", "radiology.manageOrders");
-        map.put("module/radiology/hello.list", "radiology.hello");
-        
+        map.put("/pages/radiology/adminInitialize.page", "radiology.initialize");
+        //map.put("/pages/radiology/settings.page", "radiology.settings");
+        // map.put("/pages/radiology/radiologySun.page", "radiology.sun");
         return map;
     }
     
