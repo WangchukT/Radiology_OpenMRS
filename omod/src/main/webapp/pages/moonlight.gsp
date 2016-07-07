@@ -1,1 +1,0 @@
-Hello, world. Welcome to Moon Light <b>OpenMRS</b>.

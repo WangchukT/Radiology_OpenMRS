@@ -5,36 +5,28 @@
  */
 package org.openmrs.module.radiology.fragment.controller;
 
-import java.util.Date;
 import java.util.List;
-import net.sourceforge.jtds.jdbc.DateTime;
 import org.openmrs.Concept;
 import org.openmrs.ConceptClass;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.radiology.study.RadiologyStudy;
 import org.openmrs.ui.framework.fragment.FragmentModel;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
- * @author youdon
+ * @author tenzin
  */
 public class ModalitylistFragmentController {
     
     
-    //public List<Concept> getConceptsByClass(ConceptClass con2)  {
-    
     public void controller(FragmentModel model) {
         
-        ConceptClass con2 = Context.getConceptService()
+        ConceptClass modality_concept = Context.getConceptService()
                 .getConceptClassByName("modality");
         
-        List<Concept> con3 = Context.getConceptService()
-                .getConceptsByClass(con2);
+        List<Concept> modality_list = Context.getConceptService()
+                .getConceptsByClass(modality_concept);
         
-        model.addAttribute("con3", con3);
+        model.addAttribute("modality_list", modality_list);
         
     }
     

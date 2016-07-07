@@ -1,0 +1,39 @@
+.modality {
+    border-style: solid;
+    border-color: gainsboro;
+    padding-left: 3%;
+    height: 350px;
+    padding-top: 15px;
+  //width: 100%;
+    
+}
+
+#modality-list {
+background-color: gainsboro;
+float: left;
+//text-height: 33px;
+}
+
+#modality-concept-message {
+    background-color: gainsboro;
+    width: 50%;
+    margin-left: 153px;
+    text-align: center;
+  
+
+}
+
+label {
+    margin-left: 5px;    
+     display: inline-block;
+}
+
+#modality-refresh {
+  //  margin-left: 24px;
+    float: right;
+   margin-right: 25px;
+}
+
+.modality-list-btn {
+    margin-top: 34px;
+}

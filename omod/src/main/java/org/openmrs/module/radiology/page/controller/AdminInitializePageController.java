@@ -13,8 +13,8 @@ public class AdminInitializePageController {
     //static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     
     public void controller(PageModel model) {
-        model.addAttribute("message", "HeOOOOO llo tenzin Wangchuk GOGOGOGOGSpring MVC Tenzin Wangchuk Framework!");
-        System.out.println("*******HelloWorldPageController");
+        model.addAttribute("message", "HelloFramework!");
+
     }
     
 }

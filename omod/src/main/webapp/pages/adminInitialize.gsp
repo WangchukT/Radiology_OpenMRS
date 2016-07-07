@@ -12,9 +12,6 @@ ${ ui.includeFragment("radiology", "breadcrumb") }
  ${ ui.includeFragment("radiology", "modalitylist") }
 
  
- <h2> hihihi jojojojojoj</h2>
-
-
 
 
 
