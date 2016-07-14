@@ -10,11 +10,10 @@ import org.openmrs.ui.framework.page.PageModel;
 public class AdminInitializePageController {
     
     
-    //static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    
     public void controller(PageModel model) {
+        
         model.addAttribute("message", "HelloFramework!");
-
+        
     }
     
 }
