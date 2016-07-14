@@ -24,6 +24,7 @@
 
 
     jq("#Save").on("click", function() {
+    jq(this).data('clicked', true);
     var resultSave=jq('input[type="checkbox"]:checked');
    if(resultSave.length > 0) {
     saveModality = [];
@@ -47,6 +48,19 @@
     }
     });
     });
+
+    jq("#view-study").on("click", function() { 
+    if(jq('#Save').data('clicked')) {
+    alert("cliked Save");
+    }
+    else
+    {
+    alert("Please Save the data");
+    }
+
+    });
+
+
     });
     });
 </script>
@@ -58,10 +72,10 @@
     <label id="modality-concept-message" for modality-concept-label> Please add Modality not appearing in list to concept dictionary and refresh  </label>
     <input type="button" name="modality-refresh" onclick="location.href='/openmrs/pages/radiology/adminInitialize.page'" id="modality-refresh" value="Refresh">
 
-<div>
+    <div>
         <% modality_list.each { modalityname -> %>
         <label class="checkbox">
-        <input id="modlist" name ="modlist" value="${ ui.format(modalityname) }"  type="checkbox">  ${ ui.format(modalityname) } </label>
+            <input id="modlist" name ="modlist" value="${ ui.format(modalityname) }"  type="checkbox">  ${ ui.format(modalityname) } </label>
         <input type="hidden" name="modlist" value="${ ui.format(modalityname) }" > 
         <br>
         <% } %>
