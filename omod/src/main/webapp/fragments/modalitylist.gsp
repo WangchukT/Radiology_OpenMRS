@@ -21,8 +21,6 @@
     alert("Nothing is checked");
     }
     });
-
-
     jq("#Save").on("click", function() {
     jq(this).data('clicked', true);
     var resultSave=jq('input[type="checkbox"]:checked');
@@ -36,8 +34,6 @@
     else {
     alert("Nothing is checked");
     }
-
-
     jq.ajax({
     type: "POST",
     url: "${ ui.actionLink('saveModality') }",
@@ -48,7 +44,6 @@
     }
     });
     });
-
     jq("#view-study").on("click", function() { 
     if(jq('#Save').data('clicked')) {
     alert("cliked Save");
@@ -57,10 +52,7 @@
     {
     alert("Please Save the data");
     }
-
     });
-
-
     });
     });
 </script>
@@ -86,5 +78,3 @@
         </div>
     </div>
 </div>
-
-
