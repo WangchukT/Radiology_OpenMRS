@@ -64,7 +64,7 @@
     <label id="modality-concept-message" for modality-concept-label> Please add Modality not appearing in list to concept dictionary and refresh  </label>
     <input type="button" name="modality-refresh" onclick="location.href='/openmrs/pages/radiology/adminInitialize.page'" id="modality-refresh" value="Refresh">
 
-    <div>
+    <div class="list-modality">
         <% modality_list.each { modalityname -> %>
         <label class="checkbox">
             <input id="modlist" name ="modlist" value="${ ui.format(modalityname) }"  type="checkbox">  ${ ui.format(modalityname) } </label>

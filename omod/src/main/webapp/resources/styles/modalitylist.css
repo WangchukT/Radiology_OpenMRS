@@ -2,15 +2,19 @@
     border-style: solid;
     border-color: gainsboro;
     padding-left: 3%;
-    height: 350px;
+   
     padding-top: 15px;
 
 }
 
+.list-modality {
+    padding-top: 30px;
+}
 
 #modality-list {
 background-color: gainsboro;
 float: left;
+font-size: 20px;
 
 }
 
@@ -26,6 +30,7 @@ float: left;
 label {
     margin-left: 5px;    
      display: inline-block;
+     
    
 }
 
@@ -37,4 +42,5 @@ label {
 
 .modality-list-btn {
     margin-top: 54px;
+    padding-bottom: 13px;
 }
