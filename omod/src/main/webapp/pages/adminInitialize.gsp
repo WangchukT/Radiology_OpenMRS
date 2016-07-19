@@ -9,9 +9,15 @@ ${ ui.includeFragment("radiology", "modalitySoftware") }
 
 ${ ui.includeFragment("radiology", "breadcrumb") }
 
- ${ ui.includeFragment("radiology", "modalitylist") }
+
 
  
+${ ui.includeFragment("radiology", "modalitylist",
+        [   start: "2011-02-16",
+            end: "2011-02-16 23:59:59.999",
+            properties: ["location", "encounterDatetime"],
+            
+        ]) }
 
 
 
