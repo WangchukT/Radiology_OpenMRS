@@ -97,4 +97,17 @@ public class ModalitylistFragmentController {
         
     }
     
+    public void saveStudy(@RequestParam(value = "studyList[]") Integer[] studyList) {
+        
+        List<Integer> saveStudyList = Arrays.asList(studyList);
+        RadiologyStudy setStudy = new RadiologyStudy();
+        
+        for (Integer studyName : saveStudyList) {
+            
+            setStudy.setStudyId(studyName);
+            
+        }
+        
+    }
+    
 }
