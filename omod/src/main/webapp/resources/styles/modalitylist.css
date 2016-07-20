@@ -50,3 +50,7 @@ label {
 #select-modality {
     width: 240px;
 }
+
+#modality-label-list li {
+    list-style-type: none;
+}

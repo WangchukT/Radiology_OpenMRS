@@ -8,15 +8,17 @@
     jq(document).ready(function() {
     
     
-        jq(document).on('click', '.save-study', function() {
+   jq(document).on('click', '.save-study', function() {
+  
    var resultSave=jq('input[name="studyList"]:checked');
     
    if(resultSave.length > 0) {
     saveStudy = [];
     resultSave.each(function() {
     saveStudy.push(jq(this).val());
+   
     });
-    alert(saveStudy + " is checked");
+    alert(saveStudy + "save study is checked");
     }
     else {
     alert("Nothing is checked");
@@ -27,10 +29,87 @@
     data : { studyList: saveStudy },
     cache: false,
     success: function(data){
+
+
     alert("Data Received");
+     jq("#modality-list").empty();
+    jq("#modality-list").html("Studies"); 
+    
+     jq("#modality-concept-message").empty();
+    jq("#modality-concept-message").text("Please Create Reports not appearing in the list then refresh");
+
+     jq("#delete-modality").empty();
+    jq("#delete-modality").val("Select Study to View Report"); 
+    jq("#delete-modality").removeClass('select-modality').addClass('select-report');
+    
+    
+     jq("#view-study").empty();
+    jq("#view-study").val("Delete Selected Reports"); 
+    jq("#view-study").removeClass('delete-study').addClass('delete-report');
+    
+    
+     jq("#Save").empty();
+    jq("#Save").val("Save Report"); 
+    jq("#Save").removeClass('save-study').addClass('save-report');
+ 
+    jq('input:checkbox[name=modlist]').each(function() 
+    {    
+    if(jq(this).is(':checked')){
+    
+    alert("what the hell");
+    alert(jq(this).val());
+    moveSome(jq(this).val());
+    
+    
+    }
+    });
+    
+    
+    
+    
+    
     }
     });
     });
+    
+    function moveSome(selectedValue) {
+    alert("moveSome");
+    
+        if (selectedValue != "empty") {
+        jq.getJSON('${ ui.actionLink("getStudyConcepts") }',
+    {
+    'studyconceptclass': selectedValue
+    })
+    .error(function(xhr, status, err) {
+    alert('AJAX error ' + err);
+    })
+    .success(function(ret) {
+
+    
+    alert("hurry");
+    jq("#header ul").empty();
+      jq("#modality-label-list").empty();
+
+     for (var i = 0; i < ret.length; i++) {
+    var conId = ret[i].conceptId;
+    var conName = ret[i].displayString;
+    
+   
+
+jq("#modality-label-list").append(jq("<li>").html('<input type="checkbox"  value="' + conId + '" name="studyList" id="id' + i + '"><label for="id' + i + '">' + conName + '</label>'));
+
+    }
+
+
+
+
+
+    });
+
+    }
+    
+    
+    }
     
     
     jq(document).on('click', '.delete-study', function() {
@@ -80,11 +159,10 @@
     jq('input:checkbox[name=modlist]').each(function() 
     {    
     if(jq(this).is(':checked')){
+    
     alert(jq(this).val());
-    myFunction(jq(this).val()); }
-
-    });
-    jq("#delete-modality").empty();
+    
+     jq("#delete-modality").empty();
     jq("#delete-modality").val("Select Modality to View Study"); 
     jq("#delete-modality").removeClass('delete-modality').addClass('select-modality');
 
@@ -96,6 +174,14 @@
      jq("#Save").empty();
     jq("#Save").val("Save Study"); 
     jq("#Save").removeClass('Save').addClass('save-study');
+    
+    
+    myFunction(jq(this).val());
+    
+    }
+
+    });
+   
     }
     else
     {
@@ -105,6 +191,16 @@
 
     });
 
+    
+    
+ 
+    
+    
+    
+    
+    
+    
+    
 
     function myFunction(selectedValue) {
     alert("helee " + selectedValue);
@@ -117,6 +213,7 @@
     alert('AJAX error ' + err);
     })
     .success(function(ret) {
+
     
      jq("#header ul").empty();
 
@@ -209,7 +306,7 @@ jq("#header ul").append(jq("<li>").html('<input type="checkbox"  value="' + conI
     <input type="button" name="modality-refresh" onclick="location.href='/openmrs/pages/radiology/adminInitialize.page'" id="modality-refresh" value="Refresh">
 
     <div class="list-modality">
-        <div style="width:30%; float:left">
+        <div id="modality-label-list" style="width:50%; float:left">
             <% modality_list.each { modalityname -> %>
             <label class="checkbox">
                 <input id="modlist" name ="modlist" value="$modalityname"  type="checkbox">  ${ ui.format(modalityname) } 
@@ -218,7 +315,7 @@ jq("#header ul").append(jq("<li>").html('<input type="checkbox"  value="' + conI
             <% } %>
         </div>
 
-        <div id="header" style="width:70%; float:right">  
+        <div id="header" style="width:50%; float:right">  
             <ul class="tabs">
 
             </ul>
