@@ -6,23 +6,79 @@
 <script>
     jq = jQuery;
     jq(document).ready(function() {
-    
-    
-   jq(document).on('click', '.save-study', function() {
+
+       jq(document).on('click', '.save-report', function() {      
+       saverReport = [];
+   jq('#unorderedlist li input:checked').each(function() {
+    saverReport.push(jq(this).val());
+    });
   
-   var resultSave=jq('input[name="studyList"]:checked');
+   
+    jq.ajax({
+    type: "POST",
+    url: "${ ui.actionLink('saveReport') }",
+    data : { reportList: saverReport },
+    cache: false,
+    success: function(data){
+  
+    }
+    });
+    });
+
     
+    
+    
+    
+    
+    
+    jq(document).on('click', '.delete-report', function() {
+
+  
+
+    
+    jq('#unorderedlist li input:checkbox[name=studyList]').each(function() {
+    
+    jq(this).parent().remove();
+ 
+    });
+
+    });
+    
+    
+      jq(document).on('click', '.select-report', function() {
+    
+
+    jq('div#modality-label-list li input:checkbox[name=studyList]').each(function() 
+    {    
+    if(jq(this).is(':checked')){
+    myFunction(jq(this).val());
+    }
+
+
+    });
+
+
+    });
+    
+    
+    
+    
+    jq(document).on('click', '.save-study', function() {
+
+    var resultSave=jq('input[name="studyList"]:checked');
+
    if(resultSave.length > 0) {
     saveStudy = [];
     resultSave.each(function() {
     saveStudy.push(jq(this).val());
-   
+
     });
-    alert(saveStudy + "save study is checked");
+   
     }
     else {
     alert("Nothing is checked");
     }
+    
     jq.ajax({
     type: "POST",
     url: "${ ui.actionLink('saveStudy') }",
@@ -30,128 +86,94 @@
     cache: false,
     success: function(data){
 
-
-    alert("Data Received");
-     jq("#modality-list").empty();
+    jq("#modality-list").empty();
     jq("#modality-list").html("Studies"); 
-    
-     jq("#modality-concept-message").empty();
+
+    jq("#modality-concept-message").empty();
     jq("#modality-concept-message").text("Please Create Reports not appearing in the list then refresh");
 
-     jq("#delete-modality").empty();
+    jq("#delete-modality").empty();
     jq("#delete-modality").val("Select Study to View Report"); 
     jq("#delete-modality").removeClass('select-modality').addClass('select-report');
-    
-    
-     jq("#view-study").empty();
+
+
+    jq("#view-study").empty();
     jq("#view-study").val("Delete Selected Reports"); 
     jq("#view-study").removeClass('delete-study').addClass('delete-report');
-    
-    
-     jq("#Save").empty();
+
+
+    jq("#Save").empty();
     jq("#Save").val("Save Report"); 
     jq("#Save").removeClass('save-study').addClass('save-report');
- 
-    jq('input:checkbox[name=modlist]').each(function() 
+
+    jq("#modality-label-list").empty();
+jq('#unorderedlist li :checked').closest('li').appendTo('#modality-label-list');
+
+ jq("#header ul").empty();
+   jq('input:checkbox[name=studyList]').each(function() 
     {    
     if(jq(this).is(':checked')){
-    
-    alert("what the hell");
-    alert(jq(this).val());
-    moveSome(jq(this).val());
-    
-    
+
+    myFunction(jq(this).val());
     }
+
+
     });
-    
-    
-    
-    
-    
+ 
+ 
+ 
+
     }
     });
     });
-    
-    function moveSome(selectedValue) {
-    alert("moveSome");
-    
-        if (selectedValue != "empty") {
-        jq.getJSON('${ ui.actionLink("getStudyConcepts") }',
-    {
-    'studyconceptclass': selectedValue
-    })
-    .error(function(xhr, status, err) {
-    alert('AJAX error ' + err);
-    })
-    .success(function(ret) {
 
-    
-    alert("hurry");
-    jq("#header ul").empty();
-      jq("#modality-label-list").empty();
+  
 
-     for (var i = 0; i < ret.length; i++) {
-    var conId = ret[i].conceptId;
-    var conName = ret[i].displayString;
-    
+
+
+
+  
+
+
+    jq(document).on('click', '.delete-study', function() {
+
    
 
-jq("#modality-label-list").append(jq("<li>").html('<input type="checkbox"  value="' + conId + '" name="studyList" id="id' + i + '"><label for="id' + i + '">' + conName + '</label>'));
-
-    }
-
-
-
-
-
-    });
-
-    }
-    
-    
-    }
-    
-    
-    jq(document).on('click', '.delete-study', function() {
-    
-    alert("delete-study");
-  
     var resultDelete=jq('input[name="studyList"]:checked');
   if(resultDelete.length > 0) {
     resultDelete.each(function() {
     jq(this).parent().remove();
     });
-    alert(" is CCCCC checked");
-    
+   
+
     }
     else {
     alert("Nothing is checked");
     }
     });
-    
-    
-    
-     jq(document).on('click', '.select-modality', function() {
-   
-    
-      jq('input:checkbox[name=modlist]').each(function() 
+
+
+
+    jq(document).on('click', '.select-modality', function() {
+
+
+    jq('input:checkbox[name=modlist]').each(function() 
     {    
-   if(jq(this).is(':checked')){
-   
-    alert(jq(this).val());
+    if(jq(this).is(':checked')){
+
     myFunction(jq(this).val());
-     }
-    
+    }
+
 
     });
-  
-  
-});
-    
+
+
+    });
+
     jq(document).on('click', '.view-study', function() {
-    
+
     if(jq('#Save').data('clicked')) {
-    alert("cliked Save")
+    
     jq("#modality-concept-message").empty();
     jq("#modality-concept-message").text("Please add studies appearing in list to concept dictionary then refresh");
 
@@ -159,29 +181,28 @@ jq("#modality-label-list").append(jq("<li>").html('<input type="checkbox"  value
     jq('input:checkbox[name=modlist]').each(function() 
     {    
     if(jq(this).is(':checked')){
-    
-    alert(jq(this).val());
-    
-     jq("#delete-modality").empty();
+
+
+    jq("#delete-modality").empty();
     jq("#delete-modality").val("Select Modality to View Study"); 
     jq("#delete-modality").removeClass('delete-modality').addClass('select-modality');
 
     jq("#view-study").empty();
     jq("#view-study").val("Delete Selected Studies"); 
     jq("#view-study").removeClass('view-study').addClass('delete-study');
-    
-    
-     jq("#Save").empty();
+
+
+    jq("#Save").empty();
     jq("#Save").val("Save Study"); 
     jq("#Save").removeClass('Save').addClass('save-study');
-    
-    
+
+
     myFunction(jq(this).val());
-    
+
     }
 
     });
-   
+
     }
     else
     {
@@ -191,19 +212,19 @@ jq("#modality-label-list").append(jq("<li>").html('<input type="checkbox"  value
 
     });
 
-    
-    
- 
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
 
     function myFunction(selectedValue) {
-    alert("helee " + selectedValue);
+ 
     if (selectedValue != "empty") {
         jq.getJSON('${ ui.actionLink("getStudyConcepts") }',
     {
@@ -214,14 +235,14 @@ jq("#modality-label-list").append(jq("<li>").html('<input type="checkbox"  value
     })
     .success(function(ret) {
 
-    
-     jq("#header ul").empty();
+
+    jq("#header ul").empty();
 
     for (var i = 0; i < ret.length; i++) {
     var conId = ret[i].conceptId;
     var conName = ret[i].displayString;
-    
-   
+
+
 
 jq("#header ul").append(jq("<li>").html('<input type="checkbox"  value="' + conId + '" name="studyList" id="id' + i + '"><label for="id' + i + '">' + conName + '</label>'));
 
@@ -248,23 +269,23 @@ jq("#header ul").append(jq("<li>").html('<input type="checkbox"  value="' + conI
 <script> 
     jq(function() {
     jq(document).ready(function() {
-    
+
     jq(document).on('click', '.delete-modality', function() {
-   
+
     var resultDelete=jq('input[type="checkbox"]:checked');
   if(resultDelete.length > 0) {
-    
+
     resultDelete.each(function() {
     jq(this).parent().remove();
     });
-    alert( "AAAA is checked");
-   
+
+
     }
     else {
     alert("Nothing is checked");
     }
     });
-    
+
     jq(document).on('click', '.Save', function() {
     jq(this).data('clicked', true);
     var resultSave=jq('input[type="checkbox"]:checked');
@@ -273,7 +294,7 @@ jq("#header ul").append(jq("<li>").html('<input type="checkbox"  value="' + conI
     resultSave.each(function() {
     saveModality.push(jq(this).val());
     });
-    alert(saveModality + " is checked");
+  
     }
     else {
     alert("Nothing is checked");
@@ -284,14 +305,14 @@ jq("#header ul").append(jq("<li>").html('<input type="checkbox"  value="' + conI
     data : { modalityList: saveModality },
     cache: false,
     success: function(data){
-    alert("Data Received");
+ 
     }
     });
     });
 
 
-  
- 
+
+
 
 
     });
@@ -316,7 +337,7 @@ jq("#header ul").append(jq("<li>").html('<input type="checkbox"  value="' + conI
         </div>
 
         <div id="header" style="width:50%; float:right">  
-            <ul class="tabs">
+            <ul id="unorderedlist">
 
             </ul>
         </div>
@@ -330,15 +351,8 @@ jq("#header ul").append(jq("<li>").html('<input type="checkbox"  value="' + conI
     </div>
 
 
-    
-    
 
-
-
-
-
-
-
+ 
 
 
 
